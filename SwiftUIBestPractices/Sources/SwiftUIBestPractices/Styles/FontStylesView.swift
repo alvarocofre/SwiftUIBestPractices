@@ -8,6 +8,21 @@
 import SwiftUI
 let rem = CGFloat(14.0)
 
+
+struct FontNameManager {
+  //MARK: name of font family
+
+  struct Rubik {
+    static let light = "Rubik-Light"
+    static let regular = "Rubik-Regular"
+    static let medium = "Rubik-Medium"
+    static let bold = "Rubik-Bold"
+    static let black = "Rubik-Black"
+    // add rest of the font style names
+  }
+  
+}
+
 extension Font {
     
     public static var h1: Font {
