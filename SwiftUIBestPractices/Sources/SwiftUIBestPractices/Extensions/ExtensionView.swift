@@ -38,7 +38,7 @@ struct ExtensionView: View {
     }
 }
 
-struct SwiftUIView_Previews: PreviewProvider {
+struct ExtensionView_Previews: PreviewProvider {
     static var previews: some View {
         ExtensionView()
     }
