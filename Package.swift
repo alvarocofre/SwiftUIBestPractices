@@ -10,7 +10,8 @@ let package = Package(
     ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
-        .library(name: "Styles", targets: ["SwiftUIBestPractices"]),
+//        .library(name: "Styles", targets: ["SwiftUIBestPractices"]),
+        .library(name: "WidgetBuilderView", targets: ["WidgetBuilderView"]),
         .library(name: "SwiftUIBestPractices",targets: ["SwiftUIBestPractices"]),
     ],
     dependencies: [
@@ -23,7 +24,11 @@ let package = Package(
         .target(
             name: "SwiftUIBestPractices",
             dependencies: [],
-            resources: [.process("Resources")]),
+            resources: []),
+        .target(
+            name: "WidgetBuilderView",
+            dependencies: [],
+            resources: []),
         .testTarget(
             name: "SwiftUIBestPracticesTests",
             dependencies: ["SwiftUIBestPractices"]),
