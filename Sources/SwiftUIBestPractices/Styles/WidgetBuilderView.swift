@@ -26,9 +26,9 @@ public struct WidgetBuilderView <Content: View>: View {
                 if isEmpty && !isLoading {
                     Spacer()
                         .frame(height: geo.size.height-280)
-//                    Image(packageResource: "empty_art", ofType: "png")
-//                        .resizable()
-//                        .scaledToFit()
+                    Image(packageResource: "empty_art", ofType: "png")
+                        .resizable()
+                        .scaledToFit()
                 } else {
                     self.content
                 }
@@ -45,9 +45,9 @@ struct WidgetBuilder_Previews: PreviewProvider {
                 Text("Hola mundo")
             }
         }
-//        WidgetBuilderView(isLoading: .constant(false), isEmpty: .constant(true)){
-//            Text("Hola mundo")
-//        }
+        WidgetBuilderView(isLoading: .constant(false), isEmpty: .constant(true)){
+            Text("Hola mundo")
+        }
         
 //        WidgetBuilderView(isLoading: .constant(false)) {
 //            Text("hola")
