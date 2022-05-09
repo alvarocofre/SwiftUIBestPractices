@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import UIKit
 
 public extension Image {
     init(packageResource name: String, ofType type: String) {
