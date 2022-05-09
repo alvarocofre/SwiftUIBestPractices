@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct WidgetBuilderView <Content: View>: View {
+public struct WidgetBuilderView <Content: View>: View {
     let content: Content
     @Binding var isLoading: Bool
     @Binding var isEmpty: Bool
     
-    init(isLoading: Binding<Bool>,
+    public init(isLoading: Binding<Bool>,
          isEmpty: Binding<Bool> = .constant(false),
          @ViewBuilder content: () -> Content) {
         self.content = content()
@@ -20,7 +20,7 @@ struct WidgetBuilderView <Content: View>: View {
         _isEmpty = isEmpty
     }
     
-    var body: some View {
+    public var body: some View {
         GeometryReader { geo in
             ScrollView(showsIndicators: false) {
                 if isEmpty && !isLoading {
