@@ -44,6 +44,8 @@ public struct WidgetBuilderView <Content: View>: View {
                 self.content
             }
         }
+        .hLeading()
+        .background(Color("SoftBackgroundColor"))
         .progressDialog(isShowing: $isLoading, message: "", progress: Progress())
     }
 }
