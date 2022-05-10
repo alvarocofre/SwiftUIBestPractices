@@ -9,32 +9,42 @@ import SwiftUI
 
 public struct WidgetBuilderView <Content: View>: View {
     let content: Content
+    var height: CGFloat?  = nil
     @Binding var isLoading: Bool
     @Binding var isEmpty: Bool
     
     public init(isLoading: Binding<Bool>,
-         isEmpty: Binding<Bool> = .constant(false),
-         @ViewBuilder content: () -> Content) {
+                isEmpty: Binding<Bool> = .constant(false),
+                height: CGFloat? = nil,
+                @ViewBuilder content: () -> Content) {
         self.content = content()
+        self.height = height
         _isLoading = isLoading
         _isEmpty = isEmpty
+        
     }
     
     public var body: some View {
-        GeometryReader { geo in
-            ScrollView(showsIndicators: false) {
-                if isEmpty && !isLoading {
+        ScrollView(showsIndicators: false) {
+            if isEmpty && !isLoading {
+                if let height = height {
                     Spacer()
-                        .frame(height: geo.size.height-280)
-                    Image(packageResource: "empty_art", ofType: "png")
-                        .resizable()
-                        .scaledToFit()
-                } else {
-                    self.content
+                        .frame(height: height)
                 }
+                Text("No hay contenido disponible")
+                    .font(.callout)
+                    .padding(12)
+                    .foregroundColor(.white)
+                    .background(Color.gray)
+                    .cornerRadius(10.0)
+                Image(packageResource: "empty_art", ofType: "png")
+                    .resizable()
+                    .scaledToFit()
+            } else {
+                self.content
             }
-            .progressDialog(isShowing: $isLoading, message: "", progress: Progress())
         }
+        .progressDialog(isShowing: $isLoading, message: "", progress: Progress())
     }
 }
 
@@ -45,12 +55,12 @@ struct WidgetBuilder_Previews: PreviewProvider {
                 Text("Hola mundo")
             }
         }
-        WidgetBuilderView(isLoading: .constant(false), isEmpty: .constant(true)){
+        WidgetBuilderView(isLoading: .constant(false), isEmpty: .constant(true), height: CGFloat(500)){
             Text("Hola mundo")
         }
         
-//        WidgetBuilderView(isLoading: .constant(false)) {
-//            Text("hola")
-//        }
+        //        WidgetBuilderView(isLoading: .constant(false)) {
+        //            Text("hola")
+        //        }
     }
 }
