@@ -19,6 +19,10 @@ public struct PrimaryButtonStyle: ButtonStyle {
     let backgroundColor: Color = Color.themePrimary
     let isDisabled: Bool
     
+    public init(isDisabled: Bool) {
+        self.isDisabled = isDisabled
+    }
+    
     public func makeBody(configuration: Self.Configuration) -> some View {
         return configuration.label
             .frame(minWidth: 0, maxWidth: .infinity)
@@ -33,8 +37,13 @@ public struct PrimaryButtonStyle: ButtonStyle {
 }
 
 public struct SecondaryButtonStyle : ButtonStyle {
+    
     let backgroundColor: Color = Color.themeSecondary
     let isDisabled: Bool
+    
+    public init(isDisabled: Bool) {
+        self.isDisabled = isDisabled
+    }
     
     public func makeBody(configuration: Self.Configuration) -> some View {
         return configuration.label
@@ -49,11 +58,15 @@ public struct SecondaryButtonStyle : ButtonStyle {
     }
 }
 
-struct SuccessButtonStyle : ButtonStyle {
+public struct SuccessButtonStyle : ButtonStyle {
     let backgroundColor: Color = Color.themeSuccess
     let isDisabled: Bool
     
-    func makeBody(configuration: Self.Configuration) -> some View {
+    public init(isDisabled: Bool) {
+        self.isDisabled = isDisabled
+    }
+    
+    public func makeBody(configuration: Self.Configuration) -> some View {
         return configuration.label
             .frame(minWidth: 0, maxWidth: .infinity)
             .foregroundColor(foregroundColor)
@@ -66,14 +79,19 @@ struct SuccessButtonStyle : ButtonStyle {
     }
 }
 
-struct OutlineButtonStyle: ButtonStyle {
+public struct OutlineButtonStyle: ButtonStyle {
+    
     let backgroundColor: Color = .white
     let foregroundColor: Color
     let isDisabled: Bool
     var strokeColor: Color { .themeForeground }
-
     
-    func makeBody(configuration: Self.Configuration) -> some View {
+    public init(foregroundColor: Color, isDisabled: Bool) {
+        self.foregroundColor = foregroundColor
+        self.isDisabled = isDisabled
+    }
+    
+    public func makeBody(configuration: Self.Configuration) -> some View {
         return configuration.label
             .frame(minWidth: 0, maxWidth: .infinity)
             .foregroundColor(foregroundColor)
@@ -90,35 +108,81 @@ struct OutlineButtonStyle: ButtonStyle {
     }
 }
 
+public struct GoogleSigninButton: View {
+    
+    public init(clicked: @escaping (() -> Void)) {
+        self.clicked = clicked
+    }
+    
+    var clicked: (() -> Void) // use closure for callback
+    
+    public var body: some View {
+        Button(action: clicked) { // call the closure here
+            HStack(){
+                Image("g_logo", bundle: .module)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 20)
+                Text("Sign in with Google")
+            }
+        }.buttonStyle(
+            OutlineButtonStyle(foregroundColor: Color.themePrimary,
+                               isDisabled: false))
+    }
+}
+
+public struct AppleSigninButton: View {
+    
+    public init(clicked: @escaping (() -> Void)) {
+        self.clicked = clicked
+    }
+    
+    var clicked: (() -> Void) // use closure for callback
+    
+    public var body: some View {
+        Button(action: clicked) { // call the closure here
+            HStack(){
+                Image(systemName: "apple.logo")
+//                Image("g_logo", bundle: .module)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 20)
+                Text("Sign in with Apple")
+            }
+        }.buttonStyle(
+            OutlineButtonStyle(foregroundColor: Color.themePrimary,
+                               isDisabled: false))
+    }
+}
+
 
 struct ButtonStyles: View {
     var body: some View {
         VStack(){
-            Button("Hello") {
+            Button("PrimaryButtonStyle") {
                 
-            }.buttonStyle(SecondaryButtonStyle(isDisabled: true))
+            }.buttonStyle(PrimaryButtonStyle(isDisabled: false))
             
-            Button {
-            } label: {
-                HStack(){
-                    Image("g_logo", bundle: .module)
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                    Text("Sign in with Google")
-                }
-
-            }.buttonStyle(OutlineButtonStyle(foregroundColor: Color.themePrimary, isDisabled: false))
+            GoogleSigninButton(clicked: {
+                print("Testing...")
+            })
             
-            Button {
-
-            } label: {
-                HStack(){
-                    Image("f_logo", bundle: .module)
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                    Text("Sign in with Facebook")
-                }
-            }.buttonStyle(OutlineButtonStyle(foregroundColor: Color.themePrimary, isDisabled: false))
+            AppleSigninButton {
+                print("Apple")
+            }
+            
+            
+            
+//            Button {
+//
+//            } label: {
+//                HStack(){
+//                    Image("f_logo", bundle: .module)
+//                        .resizable()
+//                        .frame(width: 20, height: 20)
+//                    Text("Sign in with Facebook")
+//                }
+//            }.buttonStyle(OutlineButtonStyle(foregroundColor: Color.themePrimary, isDisabled: false))
 
             Button("PrimaryButtonStyle") {
                 print("Button pressed!")
