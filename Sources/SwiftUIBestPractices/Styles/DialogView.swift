@@ -115,10 +115,12 @@ public extension View where Self == ActivityIndicator {
     }
 }
 
-struct SwiftUIView_Previews: PreviewProvider {
+struct DialogView_Previews: PreviewProvider {
     static var previews: some View {
         Text("Hola mundo")
-            .progressDialog(isShowing: .constant(true), message: "Cargando...", progress: Progress())
+            .progressDialog(isShowing: .constant(true),
+                            message: "Cargando...",
+                            progress: Progress())
 //            .genericDialog(isShowing: .constant(true), dialogContent: {
 //                Text("Hi")
 //                    .padding()
