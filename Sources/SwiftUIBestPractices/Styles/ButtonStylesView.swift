@@ -95,7 +95,7 @@ public struct OutlineButtonStyle: ButtonStyle {
         return configuration.label
             .frame(minWidth: 0, maxWidth: .infinity)
             .foregroundColor(foregroundColor)
-            .font(.p)
+//            .font(.p)
             .padding(padding)
             .background(backgroundColor.opacity(
                 configuration.isPressed || isDisabled ? pressedColorOpacity : 1
@@ -110,11 +110,13 @@ public struct OutlineButtonStyle: ButtonStyle {
 
 public struct GoogleSigninButton: View {
     
-    public init(clicked: @escaping (() -> Void)) {
+    public init(text: String = "Sign in with Google", clicked: @escaping (() -> Void)) {
         self.clicked = clicked
+        self.text = text
     }
     
     var clicked: (() -> Void) // use closure for callback
+    var text: String = "Sign in with Google"
     
     public var body: some View {
         Button(action: clicked) { // call the closure here
@@ -123,7 +125,7 @@ public struct GoogleSigninButton: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(height: 20)
-                Text("Sign in with Google")
+                Text(text)
             }
         }.buttonStyle(
             OutlineButtonStyle(foregroundColor: Color.themePrimary,
@@ -162,6 +164,10 @@ struct ButtonStyles: View {
             Button("PrimaryButtonStyle") {
                 
             }.buttonStyle(PrimaryButtonStyle(isDisabled: false))
+            
+            GoogleSigninButton(text: "Entra con Google") {
+                
+            }
             
             GoogleSigninButton(clicked: {
                 print("Testing...")

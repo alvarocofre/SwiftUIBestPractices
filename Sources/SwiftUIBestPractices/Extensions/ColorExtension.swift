@@ -26,7 +26,7 @@ extension Color {
     public static let themeBorderLineSelected = Color("BorderLineSelectedColor", bundle: .module)
     public static let themeBackgroundSoftColor = Color("BackgroundSoftColor", bundle: .module)
     
-    init(hex: String) {
+    public init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         var int: UInt64 = 0
         Scanner(string: hex).scanHexInt64(&int)

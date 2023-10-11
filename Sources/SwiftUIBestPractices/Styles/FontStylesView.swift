@@ -10,45 +10,49 @@ let rem = CGFloat(14.0)
 
 
 struct FontNameManager {
-  //MARK: name of font family
-
-  struct Rubik {
-    static let light = "Rubik-Light"
-    static let regular = "Rubik-Regular"
-    static let medium = "Rubik-Medium"
-    static let bold = "Rubik-Bold"
-    static let black = "Rubik-Black"
-    // add rest of the font style names
-  }
-  
+    //MARK: name of font family
+    
+    struct Rubik {
+        static let light = "Rubik-Light"
+        static let regular = "Rubik-Regular"
+        static let medium = "Rubik-Medium"
+        static let bold = "Rubik-Bold"
+        static let black = "Rubik-Black"
+        // add rest of the font style names
+    }
+    
 }
 
 extension Font {
     
-    public static var h1: Font {
-        return Font.system(size: rem+8).weight(.bold)
-    }
-    public static var h2: Font {
-        return Font.system(size: rem+5)
+    static var superTitle: Font {
+        return Font.system(size: rem+24).weight(.bold)
     }
     
-    public static var h3: Font {
-        return Font.system(size: rem+2)
+    static var h1: Font {
+        return Font.system(size: rem+12).weight(.bold)
+    }
+    static var h2: Font {
+        return Font.system(size: rem+8)
     }
     
-    public static var h4: Font {
+    static var h3: Font {
+        return Font.system(size: rem+4)
+    }
+    
+    static var h4: Font {
         return Font.system(size: rem,weight: Weight.ultraLight)
     }
     
-    public static var p: Font {
+    static var p: Font {
         return Font.system(size: rem, weight: .light)
     }
     
-    public static var small: Font {
+    static var small: Font {
         return Font.system(size: 0.75*rem)
     }
     
-    public static var sub: Font {
+    static var sub: Font {
         return Font.system(size: 0.8*rem)
     }
     
@@ -57,6 +61,8 @@ extension Font {
 struct FontStylesView: View {
     var body: some View {
         VStack(alignment: .leading){
+            Text("Title >> Heading con mucho texto para ver como se comporta")
+                .font(.superTitle)
             Text("h1 Heading con mucho texto para ver como se comporta")
                 .font(.h1)
             Text("h2 Heading")
